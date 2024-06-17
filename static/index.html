@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+</head>
+<body>
+    <h1>My Blog</h1>
+
+    <form hx-post="/api/blog" hx-trigger="submit" hx-target="#posts" hx-swap="outerHTML">
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="content" placeholder="Content" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="posts">
+        <!-- Posts will be loaded here -->
+    </div>
+
+    <script>
+        fetch('/api/blog')
+            .then(response => response.json())
+            .then(posts => {
+                const postsDiv = document.getElementById('posts');
+                postsDiv.innerHTML = '';
+                posts.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'post';
+                    postDiv.innerHTML = `<h2>${post.title}</h2>${post.html_content}<small>${new Date(post.created_at).toLocaleString()}</small>`;
+                    postsDiv.appendChild(postDiv);
+                });
+            });
+    </script>
+</body>
+</html>
