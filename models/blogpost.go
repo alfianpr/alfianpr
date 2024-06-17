@@ -3,11 +3,11 @@ package models
 import (
 	"time"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type BlogPost struct {
-	ID          uint      `gorm:"primary_key"`
+	ID          uint      `gorm:"primaryKey"`
 	Title       string    `json:"title"`
 	Content     string    `json:"content"`
 	HTMLContent string    `json:"html_content"`

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+</head>
+<body>
+    <h1>My Blog</h1>
+    <p>Hello, my name is Alfian. I am a software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Welcome to my blog where I share my thoughts and experiences.</p>
+
+    <h2>Top 5 Blog Posts</h2>
+    <div id="posts">
+        {{ range .Posts }}
+        <div class="post">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .HTMLContent }}</p>
+            <small>{{ .CreatedAt }}</small>
+        </div>
+        {{ end }}
+    </div>
+
+    <h2>New Blog Post</h2>
+    <form hx-post="/api/blog" hx-trigger="submit" hx-target="#posts" hx-swap="outerHTML">
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="content" placeholder="Content" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
