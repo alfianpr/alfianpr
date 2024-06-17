@@ -4,8 +4,9 @@ go 1.22
 
 require (
 	github.com/gin-gonic/gin v1.9.0
-	github.com/jinzhu/gorm v1.9.16
 	github.com/russross/blackfriday/v2 v2.0.1
+	gorm.io/driver/sqlite v1.2.5
+	gorm.io/gorm v1.23.8
 )
 
 require (

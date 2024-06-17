@@ -18,7 +18,7 @@ func GetPosts(c *gin.Context) {
 
 func CreatePost(c *gin.Context) {
 	var post models.BlogPost
-	if err := c.ShouldBindJSON(&post); err != nil {
+	if err := c.BindJSON(&post); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
